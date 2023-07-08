@@ -1,0 +1,21 @@
+P3
+# A manually calculated version of scaling init.ppm by two
+# In this image, the edge is handled by only interpolating horizontally or vertically
+# Formula: P(x,y) = 1/s^2 * ((s-y)(s-x)P(0,0) + (s-y)xP(0,s) + y(s-x)P(s,0) + yxP(s,s))
+#
+# "Manually" means I entered the following definitions into Python:
+# s = 2
+# def ca(x, y, p00, p0s, ps0, pss):
+#     return (1/(s*s)) * ((s-y)*(s-x)*p00 + (s-y)*x*p0s + y*(s-x)*ps0 + y*x*pss)
+# And then called the function for each point (if I were to implement a loop for this purpose,
+# there is too big risk that I might make a mistake).
+# I then compared the results to the output of
+#   $ pamstretch -plain 2 test/scale/init.ppm
+# to ensure correctness.
+# (In other cases, pamstretch output might differ from our implementation due to their slightly
+# different approach, but if there were any differences, I would have checked the calculations again.)
+4 4 255
+255 0 0     127 127 127   0 255 255     0 255 255
+127 0 127   127 63 191    127 127 255   127 127 255
+0 0 255     127 0 255     255 0 255     255 0 255
+0 0 255     127 0 255     255 0 255     255 0 255

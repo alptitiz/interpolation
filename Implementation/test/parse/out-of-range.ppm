@@ -1,0 +1,5 @@
+P6
+# This file makes the assumption that SIZE_MAX is at most 18446744073709551615
+# Maybe that can be done better?
+18446744073709551616 10
+255
